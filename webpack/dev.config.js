@@ -9,6 +9,13 @@ module.exports = {
     './src/index',
   ],
 
+  module: {
+    loaders: [{
+      test: /\.scss$/,
+      loader: 'style!css?localIdentName=[path][name]--[local]!postcss-loader!sass',
+    }],
+  },
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -20,5 +27,8 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+    }),
   ],
 };
